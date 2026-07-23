@@ -1,0 +1,40 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
+
+# ABAP / SAP specific
+*.zip
+*.trr
+*.trc
+*.sap
+*$*
+# ABAP Developer Edition / SAP GUI local files
+sapuser*.ini
+saplogon*.ini
+
+# ABAP transpiler / abapGit cache (if used later)
+.abapgit*
+.abap*
+
+# Archive / backup
+*.7z
+*.rar
+*.bak
+*.backup
+
+# Python (if any helper scripts are added later)
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
