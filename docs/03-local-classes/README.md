@@ -1,30 +1,59 @@
-# Unit 03: Working with Local Classes
+# Módulo 03: Trabalhando com Classes Locais
 
-## Objectives
+## 🎯 Objetivos do Módulo
 
-- Understand object-oriented programming concepts in ABAP.
-- Learn how to define and use local classes.
-- Understand methods, attributes, constructors, and visibility.
+Depois de completar este módulo, você será capaz de:
 
-## Key Concepts
+- Definir classes locais dentro de classes globais.
+- Criar instâncias de classes e trabalhar com referências de objetos.
+- Declarar e implementar métodos com parâmetros.
+- Usar construtores para inicializar objetos.
+- Aplicar encapsulamento com visibilidade `PRIVATE` e métodos de acesso.
 
-*Add notes here as you progress through the lessons.*
+---
 
-## What I Learned
+## 📚 Aulas
 
-*Summarize the main takeaways from this unit.*
+| N   | Aula | Objetivo |
+|-----|------|----------|
+| 01  | **Definindo uma Classe Local** | Definir uma classe local dentro de uma classe global, declarar atributos de instância e estáticos |
+| 02  | **Criando Instâncias de uma Classe** | Criar instâncias de uma classe ABAP, usar variáveis de referência e gerenciar múltiplos objetos |
+| 03  | **Definindo e Chamando Métodos** | Definir e chamar métodos, usar parâmetros IMPORTING/EXPORTING/RETURNING e tratar exceções |
 
-## Open Questions
+---
 
-*List any doubts or topics to revisit later.*
+## 🗂️ Estrutura de Arquivos
 
-## Code Examples
+```
+docs/03-local-classes/
+├── README.md                                    ← este arquivo
+├── 01-defining-a-local-class/
+│   ├── README.md                                ← documentação da aula
+│   ├── local_class.abap                         ← código de demonstração
+│   ├── exercises-readme.md                      ← enunciado dos exercícios
+│   └── solution.abap                            ← solução dos exercícios
+├── 02-creating-instances-of-a-class/
+│   ├── README.md                                ← documentação da aula
+│   ├── creating_instances.abap                  ← código de demonstração
+│   ├── exercises-readme.md                      ← enunciado dos exercícios
+│   └── solution.abap                            ← solução dos exercícios
+├── 03-defining-and-calling-methods/
+│   ├── README.md                                ← documentação da aula
+│   ├── defining_methods.abap                    ← código de demonstração
+│   ├── exercises-readme.md                      ← enunciado dos exercícios
+│   └── solution.abap                            ← solução dos exercícios
+├── exercises-readme.md                          ← exercícios gerais do módulo (placeholder)
+└── solution.abap                                ← solução geral do módulo (placeholder)
+```
 
-Os exemplos de código ficam junto de cada aula. Exemplos deste módulo:
-- [local_class.abap](./local_class.abap)
+---
 
-## Exercises
+## 📝 Notas de Estudo
 
-Os exercícios ficam junto de cada aula. Soluções deste módulo:
-- [solution.abap](./solution.abap)
-- [Exercícios](./exercises-readme.md)
+*Adicione aqui anotações e observações conforme avança nas aulas.*
+
+---
+
+## ❓ Dúvidas
+
+*Liste dúvidas ou tópicos para revisitar depois.*

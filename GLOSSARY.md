@@ -6,7 +6,7 @@
 
 ---
 
-**Índice rápido:** [A](#a) · [C](#c) · [D](#d) · [E](#e) · [G](#g) · [I](#i) · [J](#j) · [O](#o) · [P](#p) · [R](#r) · [S](#s) · [T](#t) · [U](#u)
+**Índice rápido:** [A](#a) · [C](#c) · [D](#d) · [E](#e) · [G](#g) · [I](#i) · [J](#j) · [L](#l) · [M](#m) · [O](#o) · [P](#p) · [R](#r) · [S](#s) · [T](#t) · [U](#u) · [V](#v)
 
 ---
 
@@ -171,6 +171,26 @@ aparecem no painel **Problems**.
 > gera o assembly executável. A diferença é que no ABAP o resultado fica
 > armazenado dentro do próprio sistema SAP.
 
+### Atributo de Instância (_Instance Attribute_)
+
+Variável declarada com [`DATA`](#data-statement) dentro da
+[definição de uma classe](#definicao-de-classe-class-definition). Cada objeto
+([instância](#classe-abap-abap-class)) criado a partir da classe tem sua
+própria cópia do atributo — modificar o valor em um objeto não afeta os demais.
+
+> 💡 **Analogia .NET:** Campo de instância em C# — `public string Name;`.
+> Cada `new Person()` tem seu próprio `Name`.
+
+### Atributo Estático (_Static Attribute_)
+
+Variável declarada com [`CLASS-DATA`](#class-data) dentro da
+[definição de uma classe](#definicao-de-classe-class-definition). O valor é
+**compartilhado** por todas as instâncias da classe — se um objeto alterar o
+valor, todos os outros veem a alteração.
+
+> 💡 **Analogia .NET:** Campo `static` em C# — `public static int Counter;`.
+> O valor pertence à classe, não a um objeto específico.
+
 ---
 
 ## C
@@ -196,6 +216,50 @@ interfaces e participar de hierarquias de herança.
 
 > 💡 **Analogia .NET:** Uma classe ABAP é conceitualmente idêntica a uma
 > classe C# — define atributos (campos/propriedades) e métodos.
+
+### Classe Local (_Local Class_)
+
+Classe definida **dentro** de um programa ABAP (tipicamente na aba
+**Local Types** de uma [classe global](#classe-global-global-class)).
+Só é visível e utilizável no programa que a define. Ideal para _helpers_,
+_DTOs_ e lógica auxiliar que não precisa ser reaproveitada em outros programas.
+
+> 💡 **Analogia .NET:** Classe privada aninhada (_nested private class_) em
+> C# — vive dentro de outra classe e só é acessível por ela.
+
+### Classe Global (_Global Class_)
+
+[Objeto de repositório](#objeto-de-desenvolvimento-development-object--repository-object)
+independente, armazenado em um [class pool](#class-pool) próprio. É visível
+para qualquer programa ABAP no sistema (respeitando regras de
+[pacote](#pacote-package)). Pode implementar interfaces como
+[`IF_OO_ADT_CLASSRUN`](#if_oo_adt_classrun) para servir como ponto de entrada
+executável (F9).
+
+> 💡 **Analogia .NET:** Classe `public` em seu próprio arquivo `.cs` —
+> acessível por qualquer outro código do projeto/solution.
+
+### Class Pool
+
+Tipo de [objeto de repositório](#objeto-de-desenvolvimento-development-object--repository-object)
+que armazena uma [classe global](#classe-global-global-class) no
+[Repositório ABAP](#repositorio-abap-abap-repository). Cada classe global
+ocupa seu próprio class pool, que contém tanto a definição quanto a
+implementação da classe.
+
+> 💡 **Analogia .NET:** Arquivo `.cs` que contém a definição completa de uma
+> classe. A diferença é que o class pool vive dentro do sistema SAP, não no
+> sistema de arquivos.
+
+### CLASS-DATA
+
+Instrução ABAP que declara um [atributo estático](#atributo-estatico-static-attribute)
+dentro da [definição de uma classe](#definicao-de-classe-class-definition).
+A sintaxe é idêntica à do [`DATA`](#data-statement), mas o valor é
+compartilhado entre **todas** as instâncias da classe.
+
+> 💡 **Analogia .NET:** `CLASS-DATA conn_counter TYPE i.` = `public static
+> int ConnCounter;` em C#.
 
 ### CLEAR (_Statement_)
 
@@ -337,6 +401,18 @@ começando em 1.
 > 💡 **Analogia .NET:** `DO n TIMES. ... ENDDO.` = `for (int i = 0; i < n;
 > i++) { }`. `DO. ... EXIT. ... ENDDO.` = `while (true) { ... break; }`.
 
+### Definição de Classe (_Class Definition_)
+
+Primeira parte da estrutura de uma [classe ABAP](#classe-abap-abap-class),
+delimitada por `CLASS <nome> DEFINITION. ... ENDCLASS.`. Contém a declaração
+de todos os membros da classe — tipos, constantes,
+[atributos de instância](#atributo-de-instancia-instance-attribute),
+[atributos estáticos](#atributo-estatico-static-attribute) e métodos —
+organizados em [seções de visibilidade](#secao-de-visibilidade-visibility-section).
+
+> 💡 **Analogia .NET:** A assinatura da classe em C# — a parte que declara
+> campos, propriedades e assinaturas de métodos (sem os corpos).
+
 ---
 
 ## E
@@ -372,6 +448,18 @@ mais [Subaccounts](#subaccount).
 
 > 💡 **Analogia .NET:** Assinatura Azure (_Azure Subscription_).
 
+### Garbage Collector (_Coletor de Lixo_)
+
+Componente do runtime [ABAP](#abap-advanced-business-application-programming)
+que remove automaticamente da memória objetos que não têm mais nenhuma
+[variável de referência](#variavel-de-referencia-reference-variable) apontando
+para eles. É executado periodicamente — o desenvolvedor não controla o momento
+exato da remoção, apenas garante que objetos inacessíveis serão limpos.
+
+> 💡 **Analogia .NET:** O Garbage Collector do .NET CLR — mesmo princípio:
+> objetos sem referência são coletados automaticamente. Não existe `delete`
+> manual como em C++.
+
 ---
 
 ## I
@@ -397,6 +485,17 @@ console. Sem esta interface, o ADT não sabe "por onde começar" a execução.
 
 > 💡 **Analogia .NET:** Equivalente ao `static void Main(string[] args)` no
 > .NET — é o contrato que transforma uma classe comum em um executável.
+
+### Implementação de Classe (_Class Implementation_)
+
+Segunda parte da estrutura de uma [classe ABAP](#classe-abap-abap-class),
+delimitada por `CLASS <nome> IMPLEMENTATION. ... ENDCLASS.`. Contém o código
+executável dos métodos declarados na [definição](#definicao-de-classe-class-definition).
+É opcional — só se torna obrigatória quando a definição contém métodos que
+precisam de implementação.
+
+> 💡 **Analogia .NET:** O corpo dos métodos em C# — a parte que contém as
+> chaves `{ }` com o código que realmente executa.
 
 ---
 
@@ -432,6 +531,46 @@ A variável de sistema [`sy-tabix`](#sy-tabix) indica o índice da linha atual.
 
 ---
 
+## M
+
+### ME (_Self-Reference_)
+
+Variável de referência implícita do ABAP, disponível apenas dentro de
+[métodos](#metodo-method) de instância. `ME` é tipada com a classe atual e
+preenchida automaticamente em runtime com o endereço da instância corrente.
+Seu uso é opcional — só é necessário quando um [parâmetro](#parametro-de-metodo-method-parameter)
+tem o mesmo nome que um atributo, criando ambiguidade.
+
+> 💡 **Analogia .NET:** `ME` = `this` em C#. `me->carrier_id` =
+> `this.CarrierId`. Assim como em C#, você só precisa usar quando há
+> conflito de nomes no escopo.
+
+### Método (_Method_)
+
+Bloco de código que implementa o comportamento de uma
+[classe](#classe-abap-abap-class). Métodos de instância são declarados com
+`METHODS` e acessam tanto atributos de instância quanto estáticos. Métodos
+de classe (estáticos) são declarados com `CLASS-METHODS` e só acessam
+componentes estáticos. Possuem uma [assinatura](#parametro-de-metodo-method-parameter)
+com [parâmetros](#parametro-de-metodo-method-parameter) e [exceções](#try--catch--endtry-exception-handling).
+
+> 💡 **Analogia .NET:** `METHODS` = método de instância (`public void
+> DoSomething()`). `CLASS-METHODS` = método estático (`public static void
+> DoSomething()`).
+
+### Método Funcional (_Functional Method_)
+
+[Método](#metodo-method) que possui um [parâmetro](#parametro-de-metodo-method-parameter)
+`RETURNING VALUE(...)`. Sua principal vantagem é poder ser usado diretamente
+em expressões ABAP — atribuições, condições lógicas (`IF`), loops (`LOOP`)
+e como argumento de outros métodos — sem necessidade de variável intermediária.
+
+> 💡 **Analogia .NET:** Qualquer método C# com retorno não-void. A diferença
+> é que no ABAP você precisa declarar explicitamente `RETURNING VALUE(...)`
+> — não há inferência automática como `return` no C#.
+
+---
+
 ## O
 
 ### Objeto de Desenvolvimento (_Development Object / Repository Object_)
@@ -458,6 +597,18 @@ do sinal: `LEFT` ou `RIGHT`), `STYLE =` (notação: `SCIENTIFIC` ou
 
 > 💡 **Analogia .NET:** Equivalente a `ToString("format")` ou format
 > specifiers no C#. `{ data DATE = ISO }` ≈ `date.ToString("yyyy-MM-dd")`.
+
+### Operador NEW (_NEW Operator_)
+
+Operador ABAP que cria uma nova instância de uma
+[classe](#classe-abap-abap-class) em memória e retorna uma
+[variável de referência](#variavel-de-referencia-reference-variable) para ela.
+A sintaxe `NEW #( )` usa inferência de tipo (o `#` deduz a classe a partir do
+tipo da variável à esquerda do `=`). Também é possível usar o nome explícito:
+`NEW lcl_connection( )`.
+
+> 💡 **Analogia .NET:** `NEW #( )` = `new()` (target-typed new) no C# 9+.
+> `NEW lcl_connection( )` = `new lcl_connection()` tradicional.
 
 ---
 
@@ -495,6 +646,21 @@ outros prefixos como `SAP`, `/DMO/`, `CL_`).
 > 💡 **Analogia .NET:** Similar à convenção de usar namespaces como
 > `MyCompany.` ou `Contoso.` para código proprietário, reservando `System.` e
 > `Microsoft.` para o framework.
+
+### Parâmetro de Método (_Method Parameter_)
+
+Variável declarada na assinatura de um [método](#metodo-method) que define o
+fluxo de dados entre o chamador e o método. O ABAP tem quatro tipos:
+`IMPORTING` (entrada, não alterável pelo método), `EXPORTING` (saída, sempre
+opcional para o chamador), `CHANGING` (entrada/saída, alterável) e `RETURNING
+VALUE(...)` (retorno funcional único). `IMPORTING` e `CHANGING` são
+obrigatórios por padrão; podem ser tornados opcionais com `OPTIONAL` ou
+`DEFAULT`.
+
+> 💡 **Analogia .NET:** `IMPORTING` = parâmetro normal C#, `EXPORTING` =
+> `out` parameter, `CHANGING` = `ref` parameter, `RETURNING` = valor de
+> retorno do método. O ABAP é mais verboso, mas a direção do fluxo de dados
+> fica explicitamente documentada na assinatura.
 
 ### Project Explorer
 
@@ -537,6 +703,16 @@ estruturas de dados e configurações do sistema.
 > 💡 **Analogia .NET:** Similar ao conceito de _Source Control_ (Git) combinado
 > com o _file system_ do projeto — mas integrado diretamente no runtime SAP.
 
+### Referência NULA (_NULL Reference_)
+
+Valor inicial de toda [variável de referência](#variavel-de-referencia-reference-variable)
+ABAP. Indica que a variável ainda não aponta para nenhum objeto. Tentar
+acessar componentes (`->`) de uma referência nula causa erro em runtime.
+Equivalente ao `null` do C#.
+
+> 💡 **Analogia .NET:** `null` em C# — `Person p = null;`. No ABAP, o valor
+> é exibido como `NULL` no debugger e não permite acesso a membros.
+
 ---
 
 ## S
@@ -559,6 +735,33 @@ curso, além de serviços de integração, IA, analytics e extensibilidade.
 
 Plataforma oficial de treinamento da SAP. Oferece cursos hands-on, sistemas de
 prática e certificações. O curso Basic ABAP Programming está hospedado aqui.
+
+### Seção de Visibilidade (_Visibility Section_)
+
+Cada uma das três divisões da [definição de uma classe](#definicao-de-classe-class-definition)
+ABAP que controla o nível de acesso aos membros declarados. A ordem é
+obrigatória: `PUBLIC SECTION` (acessível de qualquer lugar), seguida de
+`PROTECTED SECTION` (acessível pela classe e subclasses), seguida de
+`PRIVATE SECTION` (acessível apenas pela própria classe). Nenhuma declaração
+pode aparecer fora dessas seções.
+
+> 💡 **Analogia .NET:** Modificadores de acesso `public`, `protected` e
+> `private` do C#. A diferença é que no ABAP eles organizam os membros em
+> blocos explícitos com ordem fixa, em vez de serem prefixos por membro.
+
+### Seletor de Componente (_Component Selector_)
+
+Operadores do ABAP usados para acessar membros de uma
+[classe](#classe-abap-abap-class): `->` (seletor de instância) acessa membros
+de um objeto através de uma [variável de referência](#variavel-de-referencia-reference-variable),
+e `=>` (seletor estático) acessa membros estáticos ([CLASS-DATA](#class-data)
+ou métodos de classe) diretamente pelo nome da classe. Diferente de C#, o
+ABAP usa símbolos diferentes para deixar explícito o tipo de acesso.
+
+> 💡 **Analogia .NET:** `obj->attr` e `Classe=>attr` = `obj.Attr` e
+> `Class.Attr` em C#. O ABAP sacrifica a uniformidade do `.` em troca de
+> clareza visual: o `->` e `=>` revelam imediatamente se o membro é de
+> instância ou estático.
 
 ### Service Instance URL
 
@@ -743,3 +946,21 @@ Unicode.
 > (`System.String` usa UTF-16). No ecossistema SAP, sistemas Unicode são o
 > equivalente — suportam caracteres de qualquer idioma sem configuração
 > adicional.
+
+---
+
+## V
+
+### Variável de Referência (_Reference Variable_)
+
+Variável ABAP declarada com `TYPE REF TO <classe>` que armazena o **endereço
+de memória** de um objeto, não o objeto em si. É usada para criar
+([`NEW`](#operador-new-new-operator)), acessar (`->`) e gerenciar instâncias
+de [classes](#classe-abap-abap-class). O valor inicial é sempre uma
+[referência nula](#referencia-nula-null-reference).
+
+> 💡 **Analogia .NET:** Em C#, toda variável de tipo classe já é uma
+> referência (ex: `Person p;`). O ABAP torna isso explícito com a sintaxe
+> `TYPE REF TO` — você sempre sabe visualmente que está lidando com um
+> ponteiro para objeto, não com um valor.
+
