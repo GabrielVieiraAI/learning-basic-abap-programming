@@ -125,7 +125,8 @@ CLASS zcl_simple_itab_demo IMPLEMENTATION.
     " ── Example 8: Practical - Shopping Cart ───────────────────────
     out->write( `=== Example 8: Shopping Cart ===` ).
 
-    TYPES tt_prices TYPE TABLE OF p LENGTH 8 DECIMALS 2.
+    TYPES: tp_price  TYPE p LENGTH 8 DECIMALS 2,
+           tt_prices TYPE TABLE OF tp_price.
     DATA cart_prices TYPE tt_prices.
 
     APPEND '29.90' TO cart_prices.

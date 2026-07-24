@@ -26,14 +26,14 @@ que permite **pausar a execução**, **inspecionar variáveis**, **executar pass
 a passo** e até **alterar valores em runtime**.
 
 ```mermaid
-graph LR
-    A[Definir breakpoint] --> B[Executar programa (F9)]
-    B --> C{Breakpoint<br/>atingido?}
-    C -->|Sim| D[Debugger pausa<br/>a execução]
-    C -->|Não| E[Programa executa<br/>normalmente]
-    D --> F[Inspecionar variáveis]
-    D --> G[Executar passo a passo<br/>F5 / F6]
-    D --> H[Continuar até<br/>próximo breakpoint (F8)]
+flowchart LR
+    A["Definir breakpoint"] --> B["Executar programa (F9)"]
+    B --> C{"Breakpoint atingido?"}
+    C -->|"Sim"| D["Debugger pausa a execução"]
+    C -->|"Não"| E["Programa executa normalmente"]
+    D --> F["Inspecionar variáveis"]
+    D --> G["Executar passo a passo (F5/F6)"]
+    D --> H["Continuar até próximo breakpoint (F8)"]
 ```
 
 > 💡 **Analogia .NET:** O ABAP Debugger é o equivalente ao debugger do Visual
@@ -127,13 +127,13 @@ Uma vez pausado no debugger, você controla a execução com:
 #### Quando usar cada um
 
 ```mermaid
-graph TD
-    A[Debugger pausado] --> B{O que você quer?}
-    B -->|"Avançar 1 linha<br/>(sem entrar em métodos)"| C[F6 - Step Over]
-    B -->|"Avançar 1 linha<br/>(inspecionar método)"| D[F5 - Step Into]
-    B -->|"Ir até o próximo<br/>breakpoint"| E[F8 - Resume]
-    B -->|"Ir até linha<br/>do cursor"| F[Shift+F8 - Run to Line]
-    B -->|"Parar debugging"| G[Terminate]
+flowchart TD
+    A["Debugger pausado"] --> B{"O que você quer?"}
+    B -->|"Avançar 1 linha (sem entrar em métodos)"| C["F6 - Step Over"]
+    B -->|"Avançar 1 linha (inspecionar método)"| D["F5 - Step Into"]
+    B -->|"Ir até o próximo breakpoint"| E["F8 - Resume"]
+    B -->|"Ir até a linha do cursor"| F["Shift+F8 - Run to Line"]
+    B -->|"Parar debugging"| G["Terminate"]
 ```
 
 ---
