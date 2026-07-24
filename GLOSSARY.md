@@ -329,6 +329,30 @@ de sintaxe.
 > 💡 **Analogia .NET:** `CONSTANTS lc_pi TYPE p LENGTH 2 DECIMALS 2 VALUE '3.14'.`
 > é equivalente a `const decimal PI = 3.14M;` em C#.
 
+### Construtor (_Constructor_)
+
+Método especial de uma [classe](#classe-abap-abap-class) com o nome reservado
+`constructor`. É chamado **automaticamente** pelo runtime a cada `NEW #( )`
+e executado uma única vez por instância. Só aceita parâmetros `IMPORTING`
+e pode lançar exceções (`RAISING`). Garante que todo objeto nasça em estado
+consistente — substitui métodos como `set_attributes`.
+
+> 💡 **Analogia .NET:** Construtor de classe em C# — `public Person(string
+> name) { }`. A diferença é que no ABAP o nome é fixo (`constructor`) e
+> não pode ter `EXPORTING` ou `RETURNING`.
+
+### Construtor Estático (_Static Constructor / Class Constructor_)
+
+Método estático especial com o nome reservado `class_constructor`. É chamado
+**uma única vez** pelo runtime, no primeiro acesso à classe (que pode ser um
+`NEW`, acesso a atributo estático ou chamada de método estático). Não aceita
+parâmetros nem lança exceções. Usado para inicializar atributos estáticos com
+valores não-iniciais.
+
+> 💡 **Analogia .NET:** Construtor estático C# — `static MyClass() { }`.
+> Ambos executam uma única vez, sem parâmetros, antes do primeiro uso da
+> classe.
+
 ### Conversão Implícita de Tipo (_Implicit Type Conversion_)
 
 Mecanismo automático do runtime ABAP que tenta converter o tipo de um valor
@@ -426,6 +450,18 @@ pelo menos 8 GB de RAM.
 
 > 💡 **Analogia .NET:** Visual Studio (não o VS Code — o Eclipse é mais pesado
 > e completo, similar ao Visual Studio tradicional).
+
+### Encapsulamento (_Encapsulation_)
+
+Princípio fundamental da orientação a objetos: os dados internos de uma
+[classe](#classe-abap-abap-class) devem ser protegidos contra acesso externo
+direto. No ABAP, implementa-se movendo atributos para a `PRIVATE SECTION` ou
+adicionando [`READ-ONLY`](#read-only) na `PUBLIC SECTION`. O acesso controlado
+é feito via [métodos](#metodo-method) ou [construtores](#construtor-constructor).
+
+> 💡 **Analogia .NET:** Campos `private` + propriedades públicas ou métodos
+> de acesso em C#. O princípio é o mesmo: proteger o estado interno do objeto
+> e garantir que ele nunca fique inconsistente.
 
 ### EXIT (_Statement_)
 
@@ -691,6 +727,17 @@ desenvolvimento ABAP.
 > completo para construir APIs RESTful com modelagem de dados (CDS ~ Entity
 > Framework), lógica de negócio (behavior ~ controllers/services) e exposição
 > OData (service ~ minimal APIs com OpenAPI).
+
+### READ-ONLY
+
+Adição permitida apenas na `PUBLIC SECTION` de uma [classe](#classe-abap-abap-class).
+Quando aplicada a um `DATA` ou [`CLASS-DATA`](#class-data), permite **leitura**
+externa do atributo mas **bloqueia escrita** fora da classe. Ideal para expor
+contadores ou informações calculadas sem risco de modificação externa.
+
+> 💡 **Analogia .NET:** Propriedade somente leitura em C# — `public int
+> Counter { get; }`. O valor pode ser lido por qualquer código, mas só a
+> própria classe pode alterá-lo.
 
 ### Repositório ABAP (_ABAP Repository_)
 

@@ -19,6 +19,7 @@ Depois de completar este módulo, você será capaz de:
 | 01  | **Definindo uma Classe Local** | Definir uma classe local dentro de uma classe global, declarar atributos de instância e estáticos |
 | 02  | **Criando Instâncias de uma Classe** | Criar instâncias de uma classe ABAP, usar variáveis de referência e gerenciar múltiplos objetos |
 | 03  | **Definindo e Chamando Métodos** | Definir e chamar métodos, usar parâmetros IMPORTING/EXPORTING/RETURNING e tratar exceções |
+| 04  | **Usando Encapsulamento para Garantir Consistência** | Explicar encapsulamento, tornar atributos privados e usar construtores de instância e estático |
 
 ---
 
@@ -40,6 +41,11 @@ docs/03-local-classes/
 ├── 03-defining-and-calling-methods/
 │   ├── README.md                                ← documentação da aula
 │   ├── defining_methods.abap                    ← código de demonstração
+│   ├── exercises-readme.md                      ← enunciado dos exercícios
+│   └── solution.abap                            ← solução dos exercícios
+├── 04-using-encapsulation-to-ensure-consistency/
+│   ├── README.md                                ← documentação da aula
+│   ├── encapsulation.abap                       ← código de demonstração
 │   ├── exercises-readme.md                      ← enunciado dos exercícios
 │   └── solution.abap                            ← solução dos exercícios
 ├── exercises-readme.md                          ← exercícios gerais do módulo (placeholder)
